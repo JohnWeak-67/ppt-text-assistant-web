@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:type="TaskPaneApp">
+
+  <Id>d71f3122-72c2-4a2c-b5a1-defb0790210c</Id>
+  <Version>1.0.0.1</Version>
+  <ProviderName>DeepSeek Harness</ProviderName>
+  <DefaultLocale>zh-CN</DefaultLocale>
+
+  <DisplayName DefaultValue="PPT 文本助手"/>
+  <Description DefaultValue="英文标题转换与异常空格扫描"/>
+
+  <IconUrl DefaultValue="https://johnweak-67.github.io/ppt-text-assistant-web/icons/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://johnweak-67.github.io/ppt-text-assistant-web/icons/icon-80.png"/>
+
+  <Hosts>
+    <Host Name="Presentation"/>
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://johnweak-67.github.io/ppt-text-assistant-web/taskpane.html"/>
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+</OfficeApp>

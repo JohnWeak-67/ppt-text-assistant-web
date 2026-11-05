@@ -1,0 +1,67 @@
+:root {
+  --accent: #2b7ce9;
+  --fg: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  margin: 0;
+  padding: 16px;
+  color: var(--fg);
+  font-size: 14px;
+}
+
+h1 { font-size: 18px; margin: 0 0 4px; }
+h2 { font-size: 15px; margin: 20px 0 8px; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+
+.muted { color: var(--muted); margin: 0; font-size: 12px; }
+.status { color: var(--muted); font-size: 12px; margin: 6px 0; }
+
+.preview {
+  min-height: 34px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #f9fafb;
+  margin: 6px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 4px 4px 4px 0;
+}
+button:disabled { background: #b0c4de; cursor: not-allowed; }
+button.ghost { background: #fff; color: var(--fg); border: 1px solid var(--border); }
+
+.row { display: flex; }
+
+.issues {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.issue {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+.issue:hover { background: #eef4fd; }
+.issue.error { border-left: 3px solid #d64545; }
+.issue.warning { border-left: 3px solid #e6a23c; }
+.issue.hint { border-left: 3px solid #909399; }
