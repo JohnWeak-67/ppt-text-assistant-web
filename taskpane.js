@@ -340,6 +340,47 @@
     "\u3009",
     "\u3015"
   ]);
+  var CJK_PUNCT = /* @__PURE__ */ new Set([
+    "\u3002",
+    "\uFF0C",
+    "\u3001",
+    "\uFF1B",
+    "\uFF1A",
+    "\uFF01",
+    "\uFF1F",
+    "\u2026",
+    "\uFF08",
+    "\uFF09",
+    "\u3010",
+    "\u3011",
+    "\u300A",
+    "\u300B",
+    "\u300C",
+    "\u300D",
+    "\u300E",
+    "\u300F",
+    "\u3008",
+    "\u3009",
+    "\u3014",
+    "\u3015",
+    "\u3016",
+    "\u3017",
+    "\u3018",
+    "\u3019",
+    "\u301A",
+    "\u301B",
+    "\u201C",
+    "\u201D",
+    "\u2018",
+    "\u2019",
+    "\uFE50",
+    "\uFE51",
+    "\uFE52",
+    "\uFE54",
+    "\uFE55",
+    "\uFE56",
+    "\uFE57"
+  ]);
   function splitParagraphs(text) {
     const out = [];
     let start = 0;
@@ -460,24 +501,28 @@
   function detectCjkAbnormalSpace(text) {
     const issues = [];
     let i = 1;
-    while (i < text.length - 1) {
-      if (isSpace(text[i]) && isHan(text[i - 1])) {
-        let j = i;
-        while (j < text.length && isSpace(text[j])) j += 1;
-        if (j < text.length && isHan(text[j])) {
-          issues.push({
-            paragraphIndex: paragraphIndexOf(text, i),
-            charOffset: i,
-            charLength: j - i,
-            ruleId: "CJK_ABNORMAL_SPACE",
-            context: makeContext(text, i, j - i),
-            severity: "warning"
-          });
-        }
-        i = j;
-      } else {
+    while (i < text.length) {
+      if (!isSpace(text[i])) {
         i += 1;
+        continue;
       }
+      const previousChar = text[i - 1];
+      let j = i;
+      while (j < text.length && isSpace(text[j])) j += 1;
+      const spaceLength = j - i;
+      const betweenHanCharacters = isHan(previousChar) && j < text.length && isHan(text[j]);
+      const afterChinesePunctuation = CJK_PUNCT.has(previousChar) && spaceLength === 1;
+      if (betweenHanCharacters || afterChinesePunctuation) {
+        issues.push({
+          paragraphIndex: paragraphIndexOf(text, i),
+          charOffset: i,
+          charLength: spaceLength,
+          ruleId: "CJK_ABNORMAL_SPACE",
+          context: makeContext(text, i, spaceLength),
+          severity: "warning"
+        });
+      }
+      i = j;
     }
     return issues;
   }
