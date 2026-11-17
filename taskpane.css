@@ -261,17 +261,3 @@ button:focus-visible {
   background: #55565C;
   border-radius: 5px;
 }
-
-/* 效果格式刷 */
-#btn-pick-effect,
-#btn-apply-effect {
-  flex: 1;
-}
-
-.status.ok {
-  color: #5ED68C;
-}
-
-.status.error {
-  color: var(--danger);
-}
